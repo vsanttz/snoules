@@ -885,3 +885,13 @@ footer {
     margin: 0 5px !important;
     flex-shrink: 0 !important;
 }
+
+/* ===== AJUSTE DIRETO PARA LOJA NO MOBILE ===== */
+@media (max-width: 768px) {
+    /* Move apenas o conteúdo principal para cima */
+    main {
+        margin-top: -50px !important; /* Negativo move para cima */
+        position: relative;
+        z-index: 1;
+    }
+}

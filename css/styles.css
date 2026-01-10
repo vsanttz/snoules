@@ -898,7 +898,7 @@ footer {
   body.page-loja .main-content,
   body.page-produtos .main-content,
   body.page-shop .main-content {
-    margin-top: -80px !important;
+    margin-top: -200px !important;
     padding-top: 20px !important;
   }
   

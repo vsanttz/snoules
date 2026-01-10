@@ -962,19 +962,3 @@ footer {
    Valores sugeridos para testar:
    -100px, -120px, -150px, -200px
 */
-
-/* ============================================================================
-   SOLUÇÃO DE EMERGÊNCIA (se nada acima funcionar)
-   ============================================================================ */
-@media (max-width: 768px) {
-  /* Solução RADICAL para Loja - Remove todo espaçamento */
-  body.page-loja main {
-    position: relative;
-    top: -150px !important; /* Ajuste este valor */
-  }
-  
-  /* Ou usando transform (mais performático) */
-  body.page-loja .container:first-of-type {
-    transform: translateY(-150px) !important;
-  }
-}

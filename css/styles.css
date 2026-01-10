@@ -885,3 +885,17 @@ footer {
     margin: 0 5px !important;
     flex-shrink: 0 !important;
 }
+
+@media (max-width: 768px) {
+    /* Ajuste DIRETO e SIMPLES */
+    main {
+        position: relative;
+        top: -200px; /* Ajuste este valor: -30px, -40px, -50px, etc */
+    }
+    
+    /* Opcional: ajusta o container se existir */
+    .container {
+        margin-top: 0 !important;
+        padding-top: 20px !important;
+    }
+}

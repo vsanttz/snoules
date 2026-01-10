@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoie - Snoules</title>
+    <meta name="description" content="Apoie a Snoules - Performance em Movimento. Faça parte da nossa evolução e ajude a impulsionar a inovação esportiva.">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/apoie.css">
+    
+    <link rel="icon" type="image/x-icon" href="images/favicon_16x16.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Ajuste crítico para mobile - Header maior */
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 200px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-images">
+        <div class="bg-left"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo - Marca de roupas esportivas" class="logo-img" loading="lazy">
+                    <div class="logo-text">SNOULES</div>
+                </div>
+                
+                <nav class="nav-menu">
+                    
+                    <!-- Container dos links de navegação -->
+                    <div class="nav-links-container" id="nav-links-container">
+                        <!-- Links de navegação -->
+                        <a href="index.html" class="nav-link">HOME</a>
+                        <a href="sobre.html" class="nav-link">SOBRE</a>
+                        <a href="loja.html" class="nav-link">LOJA</a>
+                        <a href="apoie.html" class="nav-link nav-link-apoie active">APOIE</a>
+                        
+                        <!-- Menu do usuário (visível apenas quando logado) -->
+                        <div class="user-menu" id="menu-usuario" style="display: none;">
+                            <span id="nome-usuario"></span>
+                        </div>
+                        <!-- Link de login (visível apenas quando não logado) -->
+                        <a href="login.html" id="link-login" class="nav-link login-link">Login</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1 class="hero-title">
+                    <span>Faça Parte da Nossa</span>
+                    Evolução
+                </h1>
+                <p class="hero-subtitle">
+                    Sua contribuição não apenas apoia nossa marca, mas impulsiona a inovação 
+                    no universo esportivo. Junte-se a nós nessa jornada de performance em movimento.
+                </p>
+            </div>
+            
+            <!-- INDICADOR DE SCROLL CORRIGIDO - FORA DO HERO-CONTENT -->
+            <div class="scroll-indicator">
+                <span>DESCUBRA MAIS</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="mission" class="mission-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Nossa Missão</h2>
+            <p class="section-subtitle fade-in">
+                Cada contribuição nos ajuda a avançar em direção a esses objetivos fundamentais
+            </p>
+            
+            <div class="mission-grid">
+                <div class="mission-card fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="mission-title">Inovação Tecnológica</h3>
+                    <p class="mission-description">
+                        Desenvolver tecidos inteligentes e soluções inovadoras que elevam 
+                        o desempenho atlético e o conforto durante a prática esportiva.
+                    </p>
+                </div>
+                
+                <div class="mission-card fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3 class="mission-title">Sustentabilidade</h3>
+                    <p class="mission-description">
+                        Implementar processos de produção ecologicamente responsáveis e 
+                        materiais sustentáveis sem comprometer a qualidade e performance.
+                    </p>
+                </div>
+                
+                <div class="mission-card fade-in">
+                    <div class="mission-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3 class="mission-title">Design Inclusivo</h3>
+                    <p class="mission-description">
+                        Criar roupas esportivas que atendam atletas de todos os tipos corporais, 
+                        promovendo inclusão e confiança através do design.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="support" class="support-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Escolha Seu Nível de Apoio</h2>
+            <p class="section-subtitle fade-in">
+                Selecione a opção que melhor se adequa ao seu perfil e contribua para o crescimento da Snoules
+            </p>
+            
+            <div class="support-tabs">
+                <button class="support-tab active" data-tab="unico">Contribuição Única</button>
+                <button class="support-tab" data-tab="empresa">Para Empresas</button>
+            </div>
+            
+            <div class="support-container">
+                <!-- Contribuição Única -->
+                <div class="support-content active" id="unico">
+                    <div class="support-cards-container">
+                        <!-- CARD DE CONTEÚDO -->
+                        <div class="support-card fade-in">
+                            <div class="support-badge badge-silver">RECOMENDADO</div>
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <h3 class="support-title">Colaborador Visionário</h3>
+                                <div class="support-price">R$ 149,90</div>
+                                <div class="support-period">contribuição única</div>
+                            </div>
+                            
+                            <ul class="support-features">
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Acesso antecipado a novos lançamentos
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Kit exclusivo de colaborador
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Participação em pesquisas de produtos
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Certificado de colaborador
+                                </li>
+                            </ul>
+                            
+                            <button class="support-button">FAZER CONTRIBUIÇÃO</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Para Empresas -->
+                <div class="support-content" id="empresa">
+                    <div class="support-cards-container">
+                        <!-- CARD DE CONTEÚDO -->
+                        <div class="support-card fade-in">
+                            <div class="support-badge badge-gold">PARCEIRO</div>
+                            <div class="support-header">
+                                <div class="support-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <h3 class="support-title">Parceiro Empresarial</h3>
+                                <div class="support-price">Sob Consulta</div>
+                                <div class="support-period">parceria personalizada</div>
+                            </div>
+                            
+                            <ul class="support-features">
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Todos os benefícios do nível Colaborador
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Branding em nossos eventos e materiais
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Kits personalizados para sua equipe
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Descontos corporativos especiais
+                                </li>
+                                <li>
+                                    <span class="feature-icon"><i class="fas fa-check"></i></span>
+                                    Desenvolvimento de produtos exclusivos
+                                </li>
+                            </ul>
+                            
+                            <button class="support-button">ENTRAR EM CONTATO</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title fade-in">O Que Nossos Apoiadores Dizem</h2>
+            <p class="section-subtitle fade-in">Conheça as experiências de quem já faz parte da comunidade Snoules</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-content">
+                        "Como atleta amador, valorizo muito a qualidade das roupas esportivas que uso. A Snoules não só entrega performance excepcional, mas tem uma proposta de valor que me fez querer fazer parte dessa jornada."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RS</div>
+                        <div class="author-info">
+                            <h4>Rafael Silva</h4>
+                            <p>Colaborador Visionário</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card fade-in">
+                    <div class="testimonial-content">
+                        "Nossa empresa se tornou parceira da Snoules porque acreditamos no potencial da marca e na sua missão. É inspirador ver como eles estão revolucionando o mercado de roupas esportivas no Brasil."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">VF</div>
+                        <div class="author-info">
+                            <h4>Vanessa Ferreira</h4>
+                            <p>Parceira Empresarial</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo" class="footer-logo" loading="lazy">
+                    <p class="footer-text">
+                        Uma marca que redefine o conceito de moda através de designs inovadores 
+                        e compromisso com a excelência.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://mail.google.com/mail/u/0/#search/snoulescreative%40gmail.com?compose=new">snoulescreative@gmail.com</a></li>
+                    </ul>
+                    <h3 class="footer-heading">Siga-nos</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/snoules/" target="_blank" title="Instagram" aria-label="Siga-nos no Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Snoules. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script do menu hamburguer -->
+    <script src="js/menu.js"></script>
+    
+    <!-- Script de autenticação -->
+    <script type="module">
+        import { atualizarInterfaceUsuario, configurarLogout, verificarAutenticacao } from './js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar autenticação
+            verificarAutenticacao();
+            
+            // Atualizar interface do usuário
+            atualizarInterfaceUsuario();
+            
+            // Configurar logout
+            configurarLogout();
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/apoie.js"></script>
+</body>
+</html>

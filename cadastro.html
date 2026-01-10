@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - SNOULES</title>
+    <!-- Favicon corrigido -->
+    <link rel="icon" type="image/x-icon" href="images/favicon_16x16.ico">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Importar também o apoie.css para usar o estilo da mensagem -->
+    <link rel="stylesheet" href="css/apoie.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Ajuste crítico para mobile - Header maior */
+        @media (max-width: 768px) {
+            .auth-section {
+                padding-top: 200px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Images -->
+    <div class="background-images">
+        <div class="bg-left" style="background-image: url('images/cuboko.gif');"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <!-- Logo corrigido -->
+                    <img src="images/logo-snoules.png" alt="Snoules Logo - Marca de roupas esportivas" class="logo-img" loading="lazy">
+                    <div class="logo-text">SNOULES</div>
+                </div>
+                <nav class="nav-menu">
+
+                    <!-- Container dos links de navegação -->
+                    <div class="nav-links-container" id="nav-links-container">
+                        <!-- Links de navegação -->
+                        <a href="index.html" class="nav-link">HOME</a>
+                        <a href="sobre.html" class="nav-link">SOBRE</a>
+                        <a href="loja.html" class="nav-link">LOJA</a>
+                        <a href="apoie.html" class="nav-link nav-link-apoie">APOIE</a>
+                        
+                        <!-- Menu do usuário (visível apenas quando logado) -->
+                        <div class="user-menu" id="menu-usuario" style="display: none;">
+                            <span id="nome-usuario"></span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Cadastro -->
+    <section class="auth-section cadastro-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-header">
+                    <h1 class="auth-title">Criar Conta</h1>
+                    <p class="auth-subtitle">Junte-se à nossa comunidade</p>
+                </div>
+
+                <form id="form-cadastro" class="auth-form">
+                    <div class="form-group">
+                        <label for="nome" class="form-label">
+                            <i class="fas fa-user"></i> Nome Completo
+                        </label>
+                        <input type="text" id="nome" class="form-input" placeholder="Seu nome completo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> Email
+                        </label>
+                        <input type="email" id="email" class="form-input" placeholder="seu@email.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="senha" class="form-label">
+                            <i class="fas fa-lock"></i> Senha
+                        </label>
+                        <div class="password-input-container">
+                            <input type="password" id="senha" class="form-input" placeholder="Mínimo 6 caracteres" required minlength="6">
+                            <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <div class="strength-text" id="strength-text">Força da senha</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmar-senha" class="form-label">
+                            <i class="fas fa-lock"></i> Confirmar Senha
+                        </label>
+                        <div class="password-input-container">
+                            <input type="password" id="confirmar-senha" class="form-input" placeholder="Digite a senha novamente" required>
+                            <button type="button" class="toggle-password" aria-label="Mostrar senha">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div id="erro-confirmar-senha" class="form-error hidden"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="termos" name="termos" required>
+                            <span class="checkmark"></span>
+                            <label for="termos" class="checkbox-text">
+                                Concordo com os 
+                                <a href="#" class="terms-link" id="abrir-termos">Termos de Serviço</a> e 
+                                <a href="#" class="terms-link" id="abrir-privacidade">Política de Privacidade</a>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="mensagem-erro" class="form-error hidden">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span></span>
+                    </div>
+
+                    <button type="submit" class="auth-button">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </button>
+
+                    <div class="login-link">
+                        <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Termos e Privacidade -->
+    <div id="modal-termos" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-termos">&times;</button>
+            <div class="modal-body">
+                <h3>Termos de Serviço e Política de Privacidade</h3>
+                <div class="terms-content">
+                    <h4>1. Aceitação dos Termos</h4>
+                    <p>Ao se cadastrar na SNOULES, você concorda com estes Termos de Serviço e nossa Política de Privacidade.</p>
+                    
+                    <h4>2. Coleta de Informações</h4>
+                    <p>Coletamos as seguintes informações:</p>
+                    <ul>
+                        <li>Nome completo para identificação e entrega</li>
+                        <li>E-mail para comunicação e recuperação de conta</li>
+                        <li>Dados de cadastro para personalização da experiência</li>
+                        <li>Endereço para envio de produtos (quando fornecido)</li>
+                        <li>Dados de pagamento (processados de forma segura)</li>
+                        <li>Histórico de compras para melhor atendimento</li>
+                    </ul>
+                    
+                    <h4>3. Uso das Informações</h4>
+                    <p>Utilizamos suas informações para:</p>
+                    <ul>
+                        <li>Processar pedidos e entregas</li>
+                        <li>Comunicação sobre status de pedidos</li>
+                        <li>Envio de novidades e promoções (se autorizado)</li>
+                        <li>Melhorar nossos produtos e serviços</li>
+                        <li>Personalizar recomendações de produtos</li>
+                        <li>Prevenir fraudes e garantir segurança</li>
+                    </ul>
+                    
+                    <h4>4. Segurança dos Dados</h4>
+                    <p>Implementamos medidas de segurança para proteger suas informações pessoais contra acesso não autorizado, incluindo:</p>
+                    <ul>
+                        <li>Criptografia de dados sensíveis</li>
+                        <li>Controles de acesso rigorosos</li>
+                        <li>Monitoramento contínuo de segurança</li>
+                        <li>Backups regulares dos dados</li>
+                    </ul>
+                    
+                    <h4>5. Compartilhamento de Dados</h4>
+                    <p>Não vendemos ou alugamos seus dados pessoais. Compartilhamos apenas com:</p>
+                    <ul>
+                        <li>Parceiros logísticos para entrega (apenas dados necessários)</li>
+                        <li>Processadores de pagamento certificados</li>
+                        <li>Prestadores de serviços essenciais ao funcionamento</li>
+                        <li>Quando exigido por lei ou autoridade competente</li>
+                    </ul>
+                    
+                    <h4>6. Direitos do Cliente</h4>
+                    <p>Você tem direito a:</p>
+                    <ul>
+                        <li>Acessar seus dados pessoais</li>
+                        <li>Corrigir informações incorretas</li>
+                        <li>Solicitar exclusão de sua conta</li>
+                        <li>Optar por não receber comunicações de marketing</li>
+                        <li>Solicitar portabilidade de dados</li>
+                        <li>Revogar consentimentos dados anteriormente</li>
+                    </ul>
+                    
+                    <h4>7. Retenção de Dados</h4>
+                    <p>Mantemos seus dados enquanto sua conta estiver ativa ou conforme necessário para:</p>
+                    <ul>
+                        <li>Cumprir obrigações legais</li>
+                        <li>Resolver disputas</li>
+                        <li>Executar acordos</li>
+                        <li>Manter registros de transações (conforme legislação)</li>
+                    </ul>
+                    
+                    <h4>8. Cookies e Tecnologias Similares</h4>
+                    <p>Utilizamos cookies para:</p>
+                    <ul>
+                        <li>Lembrar preferências do usuário</li>
+                        <li>Melhorar a experiência de navegação</li>
+                        <li>Analisar tráfego e uso do site</li>
+                        <li>Personalizar conteúdo e anúncios</li>
+                    </ul>
+                    <p>Você pode controlar o uso de cookies nas configurações do seu navegador.</p>
+                    
+                    <h4>9. Menores de Idade</h4>
+                    <p>Nossos serviços não são direcionados a menores de 18 anos. Não coletamos intencionalmente dados de menores. Se descobrirmos tal coleta, excluiremos imediatamente.</p>
+                    
+                    <h4>10. Alterações nos Termos</h4>
+                    <p>Podemos atualizar estes termos periodicamente. Notificaremos sobre mudanças significativas através do e-mail cadastrado ou por aviso no site.</p>
+                    
+                    <h4>11. Lei Aplicável</h4>
+                    <p>Estes Termos são regidos pelas leis brasileiras. Qualquer disputa será resolvida no foro da comarca onde a empresa tem sede.</p>
+                    
+                    <h4>12. Contato</h4>
+                    <p>Para questões sobre privacidade ou exercer seus direitos:</p>
+                    <ul>
+                        <li>E-mail: privacidade@snoules.com</li>
+                        <li>Telefone: (11) 99999-9999</li>
+                        <li>Endereço: Av. Paulista, 1000 - São Paulo/SP</li>
+                    </ul>
+                    
+                    <h4>13. Política de Devoluções</h4>
+                    <p>Além dos aspectos de privacidade, informamos que:</p>
+                    <ul>
+                        <li>Prazo para devolução: 30 dias a partir do recebimento</li>
+                        <li>Produto deve estar em perfeitas condições</li>
+                        <li>Etiquetas e embalagens originais devem ser mantidas</li>
+                        <li>Custo de frete de devolução por conta do cliente (exceto em caso de defeito)</li>
+                    </ul>
+                    
+                    <h4>14. Formas de Pagamento</h4>
+                    <p>Aceitamos:</p>
+                    <ul>
+                        <li>Cartões de crédito (todas as bandeiras)</li>
+                        <li>Cartões de débito</li>
+                        <li>PIX (pagamento instantâneo)</li>
+                        <li>Boleto bancário</li>
+                    </ul>
+                    
+                    <h4>15. Entrega</h4>
+                    <p>Realizamos entregas para todo o Brasil:</p>
+                    <ul>
+                        <li>Prazo médio: 5-15 dias úteis</li>
+                        <li>Acompanhamento online do pedido</li>
+                        <li>Entregas expressas disponíveis</li>
+                        <li>Retirada em loja física (quando disponível)</li>
+                    </ul>
+                    
+                    <p><strong>Data de vigência:</strong> 01 de Janeiro de 2024</p>
+                    <p><strong>Última atualização:</strong> 06 de Janeiro de 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <!-- Logo do footer corrigido -->
+                    <img src="images/logo-snoules.png" alt="Logo" class="footer-logo">
+                    <p class="footer-text">Sua loja online de produtos exclusivos e de qualidade.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/snoules/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Loja Online. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script do menu hamburguer -->
+    <script src="js/menu.js"></script>
+    
+    <!-- Scripts -->
+    <script>
+        // Função para mostrar mensagem "EM BREVE" (igual à do apoie.html)
+        function mostrarMensagemEmBreve() {
+            const mensagem = document.createElement('div');
+            mensagem.className = 'soon-message';
+            mensagem.textContent = 'EM BREVE';
+            
+            document.body.appendChild(mensagem);
+            
+            setTimeout(() => {
+                if (mensagem.parentNode) {
+                    mensagem.parentNode.removeChild(mensagem);
+                }
+            }, 2000);
+            
+            return false;
+        }
+
+        // Funções de validação
+        function validarEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function mostrarErro(elemento, mensagem) {
+            if (elemento) {
+                elemento.textContent = mensagem;
+                elemento.classList.remove('hidden');
+                return true;
+            }
+            return false;
+        }
+
+        function limparErro(elemento) {
+            if (elemento) {
+                elemento.textContent = '';
+                elemento.classList.add('hidden');
+            }
+        }
+
+        // Inicializar quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle de mostrar senha
+            const toggleButtons = document.querySelectorAll('.toggle-password');
+            
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const container = e.currentTarget.closest('.password-input-container');
+                    const input = container.querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    // Alternar entre mostrar e esconder
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        icon.classList.remove('fa-eye');
+                        icon.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        icon.classList.remove('fa-eye-slash');
+                        icon.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            // Indicador de força da senha com animação
+            const senhaInput = document.getElementById('senha');
+            const strengthFill = document.getElementById('strength-fill');
+            const strengthText = document.getElementById('strength-text');
+            
+            if (senhaInput && strengthFill && strengthText) {
+                // Estado anterior para comparação
+                let lastStrength = 0;
+                let lastClass = '';
+                
+                senhaInput.addEventListener('input', function() {
+                    const senha = senhaInput.value;
+                    let strength = 0;
+                    let text = '';
+                    let className = '';
+                    
+                    if (senha.length > 0) {
+                        strength += 25;
+                        text = 'Fraca';
+                        className = 'weak';
+                    }
+                    
+                    if (senha.length >= 6) {
+                        strength += 25;
+                        text = 'Média';
+                        className = 'fair';
+                    }
+                    
+                    if (/[A-Z]/.test(senha) && /[0-9]/.test(senha)) {
+                        strength += 25;
+                        text = 'Boa';
+                        className = 'good';
+                    }
+                    
+                    if (senha.length >= 10 && /[A-Z]/.test(senha) && /[0-9]/.test(senha) && /[^A-Za-z0-9]/.test(senha)) {
+                        strength += 25;
+                        text = 'Forte';
+                        className = 'strong';
+                    }
+                    
+                    // Se não houver senha, limpar
+                    if (senha.length === 0) {
+                        strength = 0;
+                        text = 'Força da senha';
+                        className = '';
+                        strengthFill.style.width = '0%';
+                        strengthFill.className = 'strength-fill';
+                        strengthText.textContent = text;
+                        strengthText.style.color = 'var(--text-secondary)';
+                        return;
+                    }
+                    
+                    // Aplicar animação apenas se a força mudou
+                    if (strength !== lastStrength || className !== lastClass) {
+                        // Resetar transição para animação suave
+                        strengthFill.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.4s ease';
+                        
+                        // Pequena animação de "pulsar" quando aumenta a força
+                        if (strength > lastStrength && strength > 0) {
+                            strengthFill.style.transform = 'scaleX(1.05) scaleY(1.2)';
+                            setTimeout(() => {
+                                strengthFill.style.transform = 'scaleX(1) scaleY(1)';
+                            }, 200);
+                        }
+                        
+                        // Aplicar largura com animação
+                        strengthFill.style.width = strength + '%';
+                        
+                        // Aplicar classe de cor
+                        strengthFill.className = 'strength-fill ' + className;
+                        
+                        // Mudar cor do texto baseado na força
+                        let textColor = 'var(--text-secondary)';
+                        if (className === 'weak') textColor = 'var(--error-color)';
+                        if (className === 'fair') textColor = '#ff9800';
+                        if (className === 'good') textColor = '#4caf50';
+                        if (className === 'strong') textColor = 'var(--success-color)';
+                        
+                        // Animação no texto
+                        strengthText.style.transition = 'all 0.3s ease';
+                        strengthText.textContent = text;
+                        strengthText.style.color = textColor;
+                        strengthText.style.fontWeight = 'bold';
+                        
+                        lastStrength = strength;
+                        lastClass = className;
+                    }
+                });
+                
+                // Adicionar efeito de foco
+                senhaInput.addEventListener('focus', function() {
+                    if (this.value.length > 0) {
+                        strengthFill.style.boxShadow = '0 0 8px currentColor';
+                    }
+                });
+                
+                senhaInput.addEventListener('blur', function() {
+                    strengthFill.style.boxShadow = 'none';
+                });
+            }
+            
+            // Validar confirmação de senha
+            const confirmarSenhaInput = document.getElementById('confirmar-senha');
+            const erroConfirmarSenha = document.getElementById('erro-confirmar-senha');
+            
+            if (confirmarSenhaInput && erroConfirmarSenha) {
+                confirmarSenhaInput.addEventListener('input', function() {
+                    const senha = document.getElementById('senha').value;
+                    const confirmarSenha = this.value;
+                    
+                    if (confirmarSenha.length > 0 && senha !== confirmarSenha) {
+                        mostrarErro(erroConfirmarSenha, 'As senhas não coincidem');
+                        this.style.borderColor = 'var(--error-color)';
+                    } else {
+                        limparErro(erroConfirmarSenha);
+                        this.style.borderColor = '';
+                    }
+                });
+            }
+            
+            // Modal de termos e privacidade
+            const modalTermos = document.getElementById('modal-termos');
+            const abrirTermosLinks = document.querySelectorAll('#abrir-termos, #abrir-privacidade');
+            const closeTermos = document.getElementById('close-termos');
+            
+            if (modalTermos) {
+                // Abrir modal
+                abrirTermosLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        modalTermos.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+                
+                // Fechar modal
+                closeTermos.addEventListener('click', function() {
+                    modalTermos.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+                
+                // Fechar ao clicar fora
+                modalTermos.addEventListener('click', function(e) {
+                    if (e.target === modalTermos) {
+                        modalTermos.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                
+                // Fechar com ESC
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && modalTermos.classList.contains('active')) {
+                        modalTermos.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+            
+            // CORREÇÃO DO CHECKBOX - Garantir que o clique funcione
+            const checkbox = document.getElementById('termos');
+            const checkmark = checkbox ? checkbox.nextElementSibling : null;
+            const label = document.querySelector('label[for="termos"]');
+            
+            // Garantir que o clique no label marque o checkbox
+            if (label && checkbox) {
+                label.addEventListener('click', function(e) {
+                    // Não interferir se clicou em um link dentro do label
+                    if (e.target.tagName === 'A') return;
+                    
+                    checkbox.checked = !checkbox.checked;
+                    // Disparar evento para atualizar visualmente
+                    checkbox.dispatchEvent(new Event('change'));
+                });
+            }
+            
+            // Garantir que o clique no checkmark marque o checkbox
+            if (checkmark && checkbox) {
+                checkmark.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    checkbox.checked = !checkbox.checked;
+                    checkbox.dispatchEvent(new Event('change'));
+                });
+            }
+            
+            // Atualizar visual do checkmark quando o checkbox mudar
+            if (checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        this.setAttribute('checked', 'checked');
+                    } else {
+                        this.removeAttribute('checked');
+                    }
+                });
+            }
+            
+            // Validar formulário de cadastro
+            const formCadastro = document.getElementById('form-cadastro');
+            const mensagemErro = document.getElementById('mensagem-erro');
+            const spanMensagemErro = mensagemErro ? mensagemErro.querySelector('span') : null;
+            
+            if (formCadastro) {
+                formCadastro.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validar campos
+                    const nome = document.getElementById('nome').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const senha = document.getElementById('senha').value;
+                    const confirmarSenha = document.getElementById('confirmar-senha').value;
+                    const termos = document.getElementById('termos').checked;
+                    
+                    // Limpar mensagens de erro
+                    limparErro(mensagemErro);
+                    
+                    let temErro = false;
+                    
+                    // Validações
+                    if (!nome || nome.length < 3) {
+                        mostrarErro(spanMensagemErro, 'Por favor, insira um nome válido (mínimo 3 caracteres)');
+                        temErro = true;
+                    }
+                    
+                    if (!email || !validarEmail(email)) {
+                        mostrarErro(spanMensagemErro, 'Por favor, insira um email válido');
+                        temErro = true;
+                    }
+                    
+                    if (!senha || senha.length < 6) {
+                        mostrarErro(spanMensagemErro, 'A senha deve ter no mínimo 6 caracteres');
+                        temErro = true;
+                    }
+                    
+                    if (senha !== confirmarSenha) {
+                        mostrarErro(spanMensagemErro, 'As senhas não coincidem');
+                        temErro = true;
+                    }
+                    
+                    if (!termos) {
+                        mostrarErro(spanMensagemErro, 'Você deve aceitar os termos de serviço e política de privacidade');
+                        temErro = true;
+                    }
+                    
+                    if (temErro) {
+                        if (mensagemErro) {
+                            mensagemErro.classList.remove('hidden');
+                            mensagemErro.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                        return;
+                    }
+                    
+                    // Se tudo estiver válido, simular envio
+                    const botaoSubmit = this.querySelector('button[type="submit"]');
+                    const textoOriginal = botaoSubmit.innerHTML;
+                    
+                    botaoSubmit.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Criando conta...';
+                    botaoSubmit.disabled = true;
+                    
+                    // Simular requisição AJAX
+                    setTimeout(() => {
+                        // MOSTRAR MENSAGEM "EM BREVE" em vez de criar conta
+                        mostrarMensagemEmBreve();
+                        
+                        botaoSubmit.innerHTML = textoOriginal;
+                        botaoSubmit.disabled = false;
+                    }, 2000);
+                });
+            }
+            
+            // Verificar se já está logado
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

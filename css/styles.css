@@ -1,0 +1,887 @@
+/* css/styles.css */
+:root {
+    /* Cores */
+    --primary-black: #0a0a0a;
+    --secondary-black: #1a1a1a;
+    --accent-gray: #2a2a2a;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #666666;
+    --border-color: #333333;
+    --success-color: #4CAF50;
+    --error-color: #f44336;
+    --hover-color: #3a3a3a;
+    
+    /* Espaçamentos */
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    
+    /* Propriedades */
+    --border-radius: 5px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset e Estilos Globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Permitir seleção em elementos de texto */
+p, h1, h2, h3, h4, h5, h6, span, .hero-subtitle, .footer-text, .footer-bottom p,
+.about-text, .section-subtitle, .product-description {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+body {
+    background-color: var(--primary-black);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+}
+
+/* Header Global */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 15px 0;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.logo-img {
+    height: 90px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+/* Container dos links de navegação */
+.nav-links-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    transition: all 0.3s ease;
+    justify-content: flex-end;
+}
+
+.nav-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    padding: 8px 0;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    text-transform: uppercase;
+    margin-left: 20px;
+}
+
+.nav-link:hover {
+    color: var(--text-secondary);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--text-primary);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    color: var(--text-secondary);
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--text-primary);
+    transition: width 0.3s ease;
+}
+
+/* REMOVER CONTATO */
+.nav-link[href*="contato"] {
+    display: none !important;
+}
+
+/* REMOVER CARRINHO */
+.cart-icon {
+    display: none !important;
+}
+
+#cart-icon-mobile {
+    display: none !important;
+}
+
+/* Footer Global */
+footer {
+    background: var(--primary-black);
+    padding: 60px 0 30px;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    margin-bottom: 40px;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footer-logo {
+    height: 90px;
+    width: 120px;
+}
+
+.footer-text {
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 400px;
+}
+
+.footer-heading {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.footer-links {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.footer-links a:hover {
+    color: var(--text-primary);
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+}
+
+.social-links a {
+    color: var(--text-muted);
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--text-primary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Animações Globais */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Background Images Global */
+.background-images {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+}
+
+.bg-left {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 45%;
+    height: 120%;
+    background-size: cover;
+    background-position: center right;
+    mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%);
+}
+
+/* ===== LAYOUT DESKTOP PARA TODOS OS DISPOSITIVOS ===== */
+
+/* Esconder botão hambúrguer completamente */
+.hamburger-btn {
+    display: none !important;
+}
+
+/* Remover overlay do menu mobile */
+.nav-overlay {
+    display: none !important;
+}
+
+/* Manter container de navegação sempre visível */
+.nav-links-container {
+    position: static !important;
+    right: auto !important;
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    border-left: none !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 0 !important;
+    transition: none !important;
+    overflow-y: visible !important;
+}
+
+/* Separar APOIE do Login - ESTILO ORIGINAL */
+.nav-link-apoie {
+    margin-right: 30px !important;
+    /* Removido o background verde e outros estilos especiais */
+    background: transparent !important;
+    color: var(--text-primary) !important;
+    font-weight: normal !important;
+    border-radius: 0 !important;
+}
+
+.nav-link-apoie:hover {
+    color: var(--text-secondary) !important;
+}
+
+/* Estilizar link de Login */
+.login-link {
+    border: 1px solid var(--border-color) !important;
+    padding: 8px 25px !important;
+    border-radius: var(--border-radius) !important;
+    background: var(--accent-gray) !important;
+    transition: all 0.3s ease !important;
+    margin-left: 20px !important;
+    margin-top: 0 !important;
+    text-align: center !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    white-space: nowrap !important;
+    order: 5 !important;
+}
+
+.login-link:hover {
+    background: var(--hover-color) !important;
+    border-color: var(--text-secondary) !important;
+}
+
+/* Menu do usuário */
+.user-menu {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    margin-left: 20px !important;
+    order: 6 !important;
+}
+
+.user-menu span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.user-menu a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.user-menu a:hover {
+    color: var(--text-secondary);
+}
+
+/* ===== ORDENAÇÃO DOS LINKS DE NAVEGAÇÃO COM HOME EM PRIMEIRO ===== */
+
+/* DESKTOP: Ordem dos elementos (com HOME em primeiro) */
+@media (min-width: 769px) {
+    /* Ordem dos elementos no desktop (com HOME, sem CONTATO e CARRINHO) */
+    .nav-links-container > .nav-link[href*="index"],
+    .nav-links-container > .nav-link[href="/"],
+    .nav-links-container > .nav-link[href*="home"],
+    .nav-links-container > .nav-link[href*="inicio"] { 
+        order: 1 !important; /* HOME */
+    }
+    
+    .nav-links-container > .nav-link[href*="sobre"],
+    .nav-links-container > .nav-link[href*="about"] { 
+        order: 2 !important; /* SOBRE */
+    }
+    
+    .nav-links-container > .nav-link[href*="loja"],
+    .nav-links-container > .nav-link[href*="produtos"],
+    .nav-links-container > .nav-link[href*="shop"],
+    .nav-links-container > .nav-link[href*="products"] { 
+        order: 3 !important; /* LOJA/PRODUTOS */
+    }
+    
+    .nav-links-container > .nav-link-apoie { 
+        order: 4 !important; /* APOIE */
+    }
+    
+    .nav-links-container > .login-link { 
+        order: 5 !important; /* LOGIN */
+    }
+    
+    .nav-links-container > .user-menu { 
+        order: 6 !important; /* MENU USUÁRIO */
+    }
+}
+
+/* MOBILE: Ordem dos elementos (com HOME em primeiro) */
+@media (max-width: 768px) {
+    /* Ordem dos elementos no mobile (com HOME) */
+    .nav-links-container > .nav-link[href*="index"],
+    .nav-links-container > .nav-link[href="/"],
+    .nav-links-container > .nav-link[href*="home"],
+    .nav-links-container > .nav-link[href*="inicio"] { 
+        order: 1 !important; /* HOME */
+    }
+    
+    .nav-links-container > .nav-link[href*="sobre"],
+    .nav-links-container > .nav-link[href*="about"] { 
+        order: 2 !important; /* SOBRE */
+    }
+    
+    .nav-links-container > .nav-link[href*="loja"],
+    .nav-links-container > .nav-link[href*="produtos"],
+    .nav-links-container > .nav-link[href*="shop"],
+    .nav-links-container > .nav-link[href*="products"] { 
+        order: 3 !important; /* LOJA/PRODUTOS */
+    }
+    
+    .nav-links-container > .nav-link-apoie { 
+        order: 4 !important; /* APOIE */
+    }
+    
+    .nav-links-container > .login-link { 
+        order: 5 !important; /* LOGIN */
+    }
+    
+    .nav-links-container > .user-menu { 
+        order: 6 !important; /* MENU USUÁRIO */
+    }
+}
+
+/* ===== RESPONSIVIDADE (mantendo layout desktop) ===== */
+
+@media (max-width: 968px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .bg-left {
+        width: 50%;
+    }
+    
+    /* Ajustar navegação para tablets */
+    .nav-link {
+        margin-left: 15px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .nav-link-apoie {
+        margin-right: 25px !important;
+    }
+    
+    .login-link {
+        margin-left: 15px !important;
+        padding: 7px 20px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .logo-img {
+        height: 80px !important;
+    }
+    
+    .logo-text {
+        font-size: 1.6rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .bg-left {
+        width: 60%;
+        opacity: 0.8;
+    }
+    
+    /* Ajustar altura do header para acomodar logo + navegação */
+    header {
+        padding: 0 !important;
+        min-height: 120px; /* Altura suficiente para logo + navegação */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    /* Conteúdo do header em coluna */
+    .header-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 10px 0 !important;
+        width: 100%;
+        gap: 0 !important;
+    }
+    
+    /* Logo no topo - centralizada */
+    .logo-container {
+        width: 100% !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin: 0 !important;
+        padding: 10px 0 !important;
+        min-height: 70px;
+    }
+    
+    .logo-img {
+        height: 60px !important;
+    }
+    
+    .logo-text {
+        font-size: 1.5rem !important;
+        letter-spacing: 2px !important;
+    }
+    
+    /* Navegação embaixo da logo - em linha */
+    .nav-menu {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 8px 0 !important;
+        background: rgba(10, 10, 10, 0.95);
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .nav-links-container {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 8px 12px !important;
+        padding: 0 10px !important;
+        margin: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+    }
+    
+    /* Resetar margens dos links */
+    .nav-link {
+        margin: 0 !important;
+        font-size: 0.8rem !important;
+        letter-spacing: 0.8px !important;
+        padding: 6px 12px !important;
+        text-align: center !important;
+        white-space: nowrap;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+    }
+    
+    /* APOIE - ESTILO ORIGINAL NO MOBILE */
+    .nav-link-apoie {
+        margin-right: 0 !important;
+        background: transparent !important;
+        color: var(--text-primary) !important;
+        font-weight: normal !important;
+        border-radius: 0 !important;
+        padding: 6px 12px !important;
+        order: 4 !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .nav-link-apoie:hover {
+        color: var(--text-secondary) !important;
+    }
+    
+    /* Login na mesma linha */
+    .login-link {
+        margin-left: 0 !important;
+        margin-top: 0 !important;
+        padding: 6px 14px !important;
+        font-size: 0.8rem !important;
+        text-align: center !important;
+        white-space: nowrap;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+        width: auto !important;
+        max-width: none !important;
+        order: 5 !important;
+    }
+    
+    /* Menu do usuário na mesma linha */
+    .user-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: auto !important;
+        gap: 10px !important;
+        flex: 0 0 auto !important;
+        order: 6 !important;
+    }
+    
+    .user-menu span, 
+    .user-menu a {
+        text-align: center !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 6px 12px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap !important;
+    }
+}
+
+@media (max-width: 600px) {
+    /* Ajustes para telas pequenas */
+    .footer-logo {
+        height: 70px;
+        width: 90px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustes para mobile pequeno */
+    header {
+        min-height: 110px;
+    }
+    
+    .logo-container {
+        padding: 8px 0 !important;
+        min-height: 60px;
+    }
+    
+    .logo-img {
+        height: 50px !important;
+    }
+    
+    .logo-text {
+        font-size: 1.3rem !important;
+        letter-spacing: 1.5px !important;
+    }
+    
+    .nav-menu {
+        padding: 6px 0 !important;
+    }
+    
+    .nav-links-container {
+        gap: 6px 10px !important;
+        padding: 0 8px !important;
+    }
+    
+    .nav-link {
+        font-size: 0.75rem !important;
+        padding: 5px 10px !important;
+        letter-spacing: 0.6px !important;
+    }
+    
+    /* APOIE mobile - estilo original */
+    .nav-link-apoie {
+        padding: 5px 10px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .login-link {
+        padding: 5px 12px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    .user-menu span, 
+    .user-menu a {
+        padding: 5px 10px !important;
+        font-size: 0.75rem !important;
+    }
+    
+    /* Ajustes originais mantidos */
+    .logo-container {
+        gap: 8px !important;
+    }
+    
+    .bg-left {
+        width: 70%;
+        opacity: 0.7;
+    }
+}
+
+@media (max-width: 360px) {
+    /* Ajustes para telas muito pequenas */
+    header {
+        min-height: 100px;
+    }
+    
+    .logo-container {
+        padding: 6px 0 !important;
+        min-height: 50px;
+    }
+    
+    .logo-text {
+        font-size: 1.1rem !important;
+        letter-spacing: 1px !important;
+    }
+    
+    .nav-links-container {
+        gap: 4px 8px !important;
+        padding: 0 5px !important;
+    }
+    
+    .nav-link {
+        font-size: 0.7rem !important;
+        padding: 4px 8px !important;
+        letter-spacing: 0.5px !important;
+    }
+    
+    /* APOIE mobile - estilo original */
+    .nav-link-apoie {
+        padding: 4px 8px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    .login-link {
+        padding: 4px 10px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    .user-menu span, 
+    .user-menu a {
+        padding: 4px 8px !important;
+        font-size: 0.7rem !important;
+    }
+    
+    /* Ajustes originais mantidos */
+    .logo-text {
+        font-size: 0.9rem !important;
+        letter-spacing: 0.8px !important;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Esconder texto da logo em telas muito pequenas */
+    .logo-text {
+        font-size: 1rem !important;
+    }
+    
+    .nav-link {
+        font-size: 0.65rem !important;
+        padding: 3px 6px !important;
+    }
+    
+    /* APOIE mobile - estilo original */
+    .nav-link-apoie {
+        padding: 3px 6px !important;
+        font-size: 0.65rem !important;
+    }
+    
+    .login-link {
+        padding: 3px 8px !important;
+        font-size: 0.65rem !important;
+    }
+    
+    .user-menu span, 
+    .user-menu a {
+        padding: 3px 6px !important;
+        font-size: 0.65rem !important;
+    }
+    
+    /* Ajustes originais mantidos */
+    .logo-text {
+        display: none;
+    }
+    
+    .logo-img {
+        height: 45px !important;
+    }
+    
+    .bg-left {
+        width: 80%;
+        opacity: 0.6;
+    }
+}
+
+/* REMOVER qualquer estilo relacionado ao menu hambúrguer ativo */
+.hamburger-btn.active,
+.nav-links-container.active,
+.nav-overlay.active {
+    display: none !important;
+}
+
+/* ===== AJUSTES PARA CONSISTÊNCIA DO LOGIN EM TODAS AS PÁGINAS ===== */
+
+/* DESKTOP: Login sempre na mesma linha */
+@media (min-width: 769px) {
+    /* Garantir que o menu de navegação tenha posicionamento correto */
+    .nav-menu {
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .nav-links-container {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* Link de Login sempre na mesma linha */
+    .login-link {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        margin-left: 20px !important;
+        order: 5 !important; /* Ajustado para 5 */
+        white-space: nowrap !important;
+    }
+    
+    /* Menu do usuário também na mesma linha */
+    .user-menu {
+        display: flex !important;
+        align-items: center !important;
+        gap: 15px !important;
+        margin-left: 20px !important;
+        order: 6 !important; /* Ajustado para 6 */
+    }
+    
+    /* Garantir que o APOIE tenha espaçamento correto - ESTILO ORIGINAL */
+    .nav-link-apoie {
+        margin-right: 30px !important;
+        order: 4 !important; /* Ajustado para 4 */
+        background: transparent !important;
+        color: var(--text-primary) !important;
+        font-weight: normal !important;
+    }
+}
+
+/* Classe para forçar alinhamento consistente */
+.nav-align-fix {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/* Garantir que todos os elementos fiquem na mesma linha */
+.nav-item-inline {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 5px !important;
+    flex-shrink: 0 !important;
+}

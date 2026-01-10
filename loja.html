@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja - Snoules</title>
+    <meta name="description" content="Snoules - Loja Virtual. Descubra nossa coleção exclusiva de roupas esportivas.">
+    <meta name="keywords" content="roupas esportivas, performance, tecnologia, conforto, moda fitness, loja virtual">
+    
+    <!-- Meta Tags para SEO -->
+    <meta property="og:title" content="Loja - Snoules">
+    <meta property="og:description" content="Descubra nossa coleção exclusiva de roupas esportivas.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Preload de imagens críticas -->
+    <link rel="preload" href="images/logo-snoules.png" as="image">
+    <link rel="preload" href="images/07.jpg" as="image">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- CSS Específico da Loja -->
+    <link rel="stylesheet" href="css/loja.css">
+
+    <link rel="icon" type="image/x-icon" href="images/favicon_16x16.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos específicos inline (checkout e pequenos ajustes) -->
+    <style>
+        /* Background específico da loja */
+        .bg-left {
+            background-image: url('images/07.jpg');
+        }
+
+        /* Ajuste crítico para mobile - Header maior */
+        @media (max-width: 768px) {
+            .store {
+                padding-top: 200px !important;
+            }
+        }
+
+        /* Ajustes específicos do checkout */
+        .checkout-form h3 {
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--primary-black);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border-radius: var(--border-radius);
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: 2px solid var(--text-primary);
+            outline-offset: 2px;
+            border-color: var(--text-primary);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        /* Estilo para campos obrigatórios */
+        .form-input:required, .form-select:required {
+            border-left: 2px solid var(--success-color);
+        }
+
+        /* Estilo opcional para o campo complemento */
+        #addressComplement::placeholder {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Ajuste específico para o formulário de endereço */
+        #step1 .form-row {
+            margin-bottom: 0;
+        }
+
+        /* Melhorias na aparência dos selects */
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23b0b0b0' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 12px;
+            padding-right: 40px;
+        }
+
+        /* Ajustes específicos para mobile */
+        @media (max-width: 768px) {
+            .checkout-body {
+                padding: 20px 15px;
+                max-height: 85vh;
+                overflow-y: auto;
+            }
+
+            .checkout-content {
+                max-width: 95%;
+                margin: 20px auto;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+                margin-bottom: 0;
+            }
+
+            /* Layout de 2 colunas para formulário em mobile */
+            #step1 .form-row {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 12px !important;
+                margin-bottom: 0;
+            }
+            
+            /* Campos que devem ocupar linha inteira */
+            #step1 .form-group.full-width-mobile {
+                grid-column: 1 / -1;
+            }
+            
+            /* Campos específicos que ficam em 2 colunas */
+            #step1 .form-group:nth-child(1), /* Nome Completo */
+            #step1 .form-group:nth-child(4) { /* Endereço */
+                grid-column: 1 / -1;
+            }
+            
+            /* Garantir que os novos campos se comportem bem em mobile */
+            #step1 .form-row .form-group:nth-child(5), /* Número */
+            #step1 .form-row .form-group:nth-child(6) { /* Complemento */
+                grid-column: auto;
+            }
+            
+            /* Ajuste específico para os campos Cidade e CEP */
+            #step1 .form-row .form-group {
+                margin-bottom: 0;
+            }
+
+            /* Campos que devem ocupar linha inteira em mobile */
+            .full-width-mobile {
+                grid-column: 1 / -1;
+            }
+
+            /* Ajustes específicos para o formulário de checkout */
+            #step1 .form-group:nth-child(1), /* Nome Completo */
+            #step1 .form-group:nth-child(2), /* Email */
+            #step1 .form-group:nth-child(3), /* Telefone */
+            #step1 .form-group:nth-child(4), /* Endereço */
+            #step2 .form-group:nth-child(1), /* Método de Pagamento */
+            #creditCardFields .form-group:nth-child(1), /* Número do Cartão */
+            #creditCardFields .form-group:nth-child(4) /* Nome no Cartão */ {
+                grid-column: 1 / -1;
+            }
+
+            /* Campos de cartão que ficam em 2 colunas */
+            #creditCardFields .form-row .form-group {
+                grid-column: auto;
+            }
+
+            /* Ajuste para o resumo do pedido */
+            .order-summary {
+                margin-top: 20px;
+                padding: 15px;
+            }
+
+            .checkout-actions {
+                flex-direction: row !important;
+                gap: 10px;
+                margin-top: 25px;
+                padding-top: 20px;
+                border-top: 1px solid var(--border-color);
+            }
+
+            .btn-back, .btn-next {
+                flex: 1;
+                min-width: auto;
+                margin: 0;
+                padding: 14px 16px !important;
+                font-size: 0.9rem !important;
+            }
+
+            /* Melhorar aparência dos inputs em mobile */
+            .form-input, .form-select {
+                padding: 14px 12px !important;
+                font-size: 16px !important;
+                min-height: 48px;
+            }
+            
+            /* Ajustar labels para mobile */
+            .form-label {
+                font-size: 0.8rem;
+                margin-bottom: 6px;
+                display: block;
+            }
+            
+            /* Ajustar o header do checkout */
+            .checkout-steps {
+                margin-bottom: 25px;
+                padding: 0 10px;
+            }
+            
+            .step-label {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Em telas muito pequenas, manter 2 colunas mas com ajustes */
+            #step1 .form-row {
+                grid-template-columns: 1fr 1fr !important;
+                gap: 10px !important;
+            }
+            
+            /* Garantir que campos importantes ocupem linha completa */
+            #step1 .form-group:nth-child(1), /* Nome */
+            #step1 .form-group:nth-child(2), /* Email */
+            #step1 .form-group:nth-child(4) { /* Endereço */
+                grid-column: 1 / -1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr !important;
+                gap: 10px;
+            }
+
+            /* Em telas muito pequenas, alguns campos voltam para 1 coluna */
+            #step1 .form-row,
+            #creditCardFields .form-row {
+                grid-template-columns: 1fr !important;
+            }
+
+            .checkout-actions {
+                flex-direction: column !important;
+            }
+
+            .btn-back, .btn-next {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Images -->
+    <div class="background-images">
+        <div class="bg-left"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo - Marca de roupas esportivas" class="logo-img" loading="lazy">
+                    <div class="logo-text">SNOULES</div>
+                </div>
+                <nav class="nav-menu">
+                    
+                    <!-- Container dos links de navegação -->
+                    <div class="nav-links-container" id="nav-links-container">
+                        <!-- Links de navegação -->
+                        <a href="index.html" class="nav-link">HOME</a>
+                        <a href="sobre.html" class="nav-link">SOBRE</a>
+                        <a href="loja.html" class="nav-link active">LOJA</a>
+                        <a href="apoie.html" class="nav-link nav-link-apoie">APOIE</a>
+                        
+                        <!-- Menu do usuário (visível apenas quando logado) -->
+                        <div class="user-menu" id="menu-usuario" style="display: none;">
+                            <span id="nome-usuario"></span>
+                        </div>
+                        <!-- Link de login (visível apenas quando não logado) -->
+                        <a href="login.html" id="link-login" class="nav-link login-link">Login</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Store Section -->
+    <section class="store">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Nossa Coleção</h1>
+                <p class="section-subtitle">Descubra nossa seleção exclusiva de roupas esportivas que combinam performance, tecnologia e conforto para elevar seu desempenho.</p>
+            </div>
+
+            <div class="products-grid">
+                <!-- Produto 1 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/vortex-1.jpg" alt="Vortex" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Vortex</h3>
+                    <div class="product-price">R$ 129,90</div>
+                    <p class="product-description">Camiseta técnica com tecnologia de respirabilidade avançada para máxima performance durante os treinos.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="1" aria-label="Ver detalhes da Camiseta Vortex">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="1" aria-label="Adicionar Camiseta Vortex ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 2 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/nexusurban-1.jpg" alt="Nexus Urban" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Nexus Urban</h3>
+                    <div class="product-price">R$ 89,90</div>
+                    <p class="product-description">Short com tecnologia de compressão e tecido de secagem rápida para conforto máximo em atividades intensas.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="2" aria-label="Ver detalhes do Shorts Nexus ">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="2" aria-label="Adicionar Short Nexus">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/vortexpro-1.jpg" alt="Vortex PRO" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Vortex PRO</h3>
+                    <div class="product-price">R$ 199,90</div>
+                    <p class="product-description">Blusa com isolamento térmico avançado, ideal para treinos em ambientes frios e condições climáticas adversas.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="3" aria-label="Ver detalhes da blusa Vortex">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="3" aria-label="Adicionar Blusa Vortex ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/legging-1.jpg" alt="Legging Premium" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Legging Premium</h3>
+                    <div class="product-price">R$ 159,90</div>
+                    <p class="product-description">Calça legging de alta compressão com tecnologia 4D que oferece suporte muscular e liberdade de movimento.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="4" aria-label="Ver detalhes da Calça Legging Premium">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="4" aria-label="Adicionar Calça Legging Premium ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 5 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/tenis-running.jpg" alt="Tênis Running Elite" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Tênis Running Elite</h3>
+                    <div class="product-price">R$ 299,90</div>
+                    <p class="product-description">Tênis de corrida com amortecimento avançado e sistema de estabilidade para máximo desempenho atlético.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="5" aria-label="Ver detalhes do Tênis Running Elite">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="5" aria-label="Adicionar Tênis Running Elite ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 6 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/moletom-esportivo.jpg" alt="Moletom Esportivo" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Moletom Esportivo</h3>
+                    <div class="product-price">R$ 179,90</div>
+                    <p class="product-description">Moletom com capuz e tecnologia de regulação térmica, perfeito para aquecimento e recuperação pós-treino.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="6" aria-label="Ver detalhes do Moletom Esportivo">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="6" aria-label="Adicionar Moletom Esportivo ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 7 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/top-esportivo.jpg" alt="Top Esportivo Performance" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Top Esportivo Performance</h3>
+                    <div class="product-price">R$ 79,90</div>
+                    <p class="product-description">Top esportivo de alto suporte com tecnologia de compressão e design ergonômico para atividades de alto impacto.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="7" aria-label="Ver detalhes do Top Esportivo Performance">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="7" aria-label="Adicionar Top Esportivo Performance ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+
+                <!-- Produto 8 -->
+                <div class="product-card fade-in">
+                    <div class="product-image">
+                        <img src="images/meias-tecnicas.jpg" alt="Meias Técnicas" loading="lazy">
+                        <div class="product-image-placeholder">Carregando imagem...</div>
+                    </div>
+                    <h3 class="product-title">Meias Técnicas</h3>
+                    <div class="product-price">R$ 39,90</div>
+                    <p class="product-description">Meias esportivas com tecnologia antibolhas e zonas de ventilação estratégicas para conforto máximo.</p>
+                    <div class="product-actions">
+                        <button class="view-details" data-product="8" aria-label="Ver detalhes das Meias Técnicas">VER DETALHES</button>
+                        <button class="add-to-cart" data-product="8" aria-label="Adicionar Meias Técnicas ao carrinho">ADICIONAR AO CARRINHO</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <h2 class="support-title">Suporte ao cliente</h2>
+            <p class="support-text">Precisa de ajuda com seu pedido ou tem dúvidas sobre nossos produtos? Nossa equipe está aqui para te ajudar!</p>
+            <p class="support-contact">Entre em contato: <strong>snoulescreative@gmail.com</strong></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo-snoules.png" alt="SNOULES" class="footer-logo" loading="lazy">
+                    <p class="footer-text">
+                        Uma marca que redefine o conceito de moda através de designs inovadores 
+                        e compromisso com a excelência.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://mail.google.com/mail/u/0/#search/snoulescreative%40gmail.com?compose=new">snoulescreative@gmail.com</a></li>
+                    </ul>
+                    <h3 class="footer-heading">Siga-nos</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/snoules/" target="_blank" title="Instagram" aria-label="Siga-nos no Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Snoules. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal product-modal" id="productModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal" aria-label="Fechar modal">&times;</button>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo do modal será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <button class="close-modal" id="closeCheckoutModal" aria-label="Fechar checkout">&times;</button>
+            <div class="checkout-body">
+                <div class="checkout-steps">
+                    <div class="step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Informações</div>
+                    </div>
+                    <div class="step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Pagamento</div>
+                    </div>
+                    <div class="step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Confirmação</div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Informações Pessoais -->
+                <div class="checkout-form active" id="step1">
+                    <h3>Informações de Entrega</h3>
+                    
+                    <!-- Linha 1: Nome Completo (largura total) -->
+                    <div class="form-group full-width-mobile">
+                        <label for="fullName" class="form-label">Nome Completo *</label>
+                        <input type="text" class="form-input" id="fullName" required aria-required="true">
+                    </div>
+                    
+                    <!-- Linha 2: Email e Telefone (2 colunas) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" class="form-input" id="email" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="form-label">Telefone *</label>
+                            <input type="tel" class="form-input" id="phone" required aria-required="true">
+                        </div>
+                    </div>
+                    
+                    <!-- Linha 3: Endereço (largura total) -->
+                    <div class="form-group full-width-mobile">
+                        <label for="address" class="form-label">Endereço *</label>
+                        <input type="text" class="form-input" id="address" required aria-required="true">
+                    </div>
+                    
+                    <!-- NOVA LINHA: Número e Complemento (2 colunas) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="addressNumber" class="form-label">Número *</label>
+                            <input type="text" class="form-input" id="addressNumber" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="addressComplement" class="form-label">Complemento</label>
+                            <input type="text" class="form-input" id="addressComplement" placeholder="Opcional (apto, bloco, etc.)">
+                        </div>
+                    </div>
+                    
+                    <!-- Linha 4: Cidade e CEP (2 colunas) -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="city" class="form-label">Cidade *</label>
+                            <input type="text" class="form-input" id="city" required aria-required="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="zipCode" class="form-label">CEP *</label>
+                            <input type="text" class="form-input" id="zipCode" required aria-required="true">
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <div></div>
+                        <button class="btn-next" data-next="2">PRÓXIMO</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Pagamento -->
+                <div class="checkout-form" id="step2">
+                    <h3>Informações de Pagamento</h3>
+                    
+                    <!-- Método de Pagamento (largura total) -->
+                    <div class="form-group full-width-mobile">
+                        <label for="paymentMethod" class="form-label">Método de Pagamento</label>
+                        <select class="form-select" id="paymentMethod">
+                            <option value="credit">Cartão de Crédito</option>
+                            <option value="debit">Cartão de Débito</option>
+                            <option value="pix">PIX</option>
+                            <option value="boleto">Boleto Bancário</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Campos do Cartão (aparecem apenas para crédito/débito) -->
+                    <div id="creditCardFields">
+                        <!-- Número do Cartão (largura total) -->
+                        <div class="form-group full-width-mobile">
+                            <label for="cardNumber" class="form-label">Número do Cartão</label>
+                            <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456">
+                        </div>
+                        
+                        <!-- Validade e CVV (2 colunas) -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cardExpiry" class="form-label">Validade</label>
+                                <input type="text" class="form-input" id="cardExpiry" placeholder="MM/AA">
+                            </div>
+                            <div class="form-group">
+                                <label for="cardCvv" class="form-label">CVV</label>
+                                <input type="text" class="form-input" id="cardCvv" placeholder="123">
+                            </div>
+                        </div>
+                        
+                        <!-- Nome no Cartão (largura total) -->
+                        <div class="form-group full-width-mobile">
+                            <label for="cardName" class="form-label">Nome no Cartão</label>
+                            <input type="text" class="form-input" id="cardName">
+                        </div>
+                    </div>
+                    
+                    <!-- Resumo do Pedido -->
+                    <div class="order-summary">
+                        <h4>Resumo do Pedido</h4>
+                        <div class="summary-item">
+                            <span>Subtotal:</span>
+                            <span id="summarySubtotal">R$ 0,00</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Frete:</span>
+                            <span id="summaryShipping">R$ 0,00</span>
+                        </div>
+                        <div class="summary-total">
+                            <span>Total:</span>
+                            <span id="summaryTotal">R$ 0,00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-actions">
+                        <button class="btn-back" data-prev="1">VOLTAR</button>
+                        <button class="btn-next" data-next="3">FINALIZAR PEDIDO</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Confirmação -->
+                <div class="checkout-form" id="step3">
+                    <div class="success-message">
+                        <div class="success-icon">✓</div>
+                        <h3>Pedido Confirmado!</h3>
+                        <p>Obrigado por sua compra. Você receberá um email de confirmação em breve.</p>
+                        <p>Número do pedido: <strong>#SN2024001</strong></p>
+                        <button class="btn-confirm" id="confirmOrder">CONTINUAR COMPRANDO</button>
+                    </div>
+                </div>
+
+                <div id="comingSoonMessage" style="display: none;">
+                    <p>🚧 Funcionalidade em desenvolvimento! Em breve você poderá finalizar suas compras online.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        Produto adicionado ao carrinho!
+    </div>
+
+    <!-- Script do menu hamburguer -->
+    <script src="js/menu.js"></script>
+    
+    <!-- Script de autenticação -->
+    <script type="module">
+        import { atualizarInterfaceUsuario, configurarLogout, verificarAutenticacao } from './js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar autenticação
+            verificarAutenticacao();
+            
+            // Atualizar interface do usuário
+            atualizarInterfaceUsuario();
+            
+            // Configurar logout
+            configurarLogout();
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/loja.js"></script>
+</body>
+</html>

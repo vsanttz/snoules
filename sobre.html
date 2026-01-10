@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - Snoules</title>
+    <meta name="description" content="Snoules - Performance em Movimento. Conheça nossa tecnologia e valores.">
+    <meta name="keywords" content="roupas esportivas, performance, tecnologia, conforto, moda fitness">
+    
+    <!-- Meta Tags para SEO -->
+    <meta property="og:title" content="Sobre - Snoules">
+    <meta property="og:description" content="Snoules - Performance em Movimento. Conheça nossa tecnologia e valores.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- CSS Específico da Página Sobre -->
+    <style>
+        .about {
+            padding: 120px 0;
+            background: var(--primary-black);
+            position: relative;
+            z-index: 1;
+            margin-top: 120px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .about-text p {
+            margin-bottom: 30px;
+        }
+
+        .image-placeholder {
+            background: var(--primary-black);
+            padding: 15px;
+            border-left: 3px solid var(--text-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+            height: fit-content;
+        }
+
+        /* IMAGEM MAIOR - PRINCIPAL ALTERAÇÃO */
+        .test-image {
+            max-width: 90%;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .status {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-message {
+            margin-bottom: 60px;
+            padding: 40px;
+            background: var(--primary-black);
+            border-left: 3px solid var(--text-primary);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .status-text {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .separator-line {
+            width: 100%;
+            height: 1px;
+            background: var(--border-color);
+            margin: 60px 0;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .status-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .status-badge:hover {
+            color: var(--primary-black);
+        }
+
+        .status-badge:hover::before {
+            left: 0;
+        }
+
+        /* Background específico da página sobre */
+        .bg-left {
+            background-image: url('images/cubokok.gif');
+        }
+
+        /* Melhorias de acessibilidade */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Responsividade específica da página sobre */
+        @media (max-width: 968px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* IMAGEM MAIOR EM TABLETS */
+            .test-image {
+                max-width: 95%;
+            }
+            
+            .about-content {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            /* AJUSTE CRÍTICO: Header maior em mobile */
+            .about {
+                margin-top: 200px !important;
+                padding: 80px 0;
+            }
+            
+            .image-placeholder {
+                padding: 10px;
+                min-height: 200px;
+            }
+            
+            .status-message {
+                padding: 30px;
+                margin-bottom: 40px;
+            }
+            
+            .separator-line {
+                margin: 40px 0;
+            }
+            
+            /* IMAGEM MAIOR EM MOBILE MÉDIO */
+            .test-image {
+                max-width: 100%;
+            }
+            
+            /* LAYOUT LADO A LADO PARA MOBILE - TEXTO ESQUERDA, IMAGEM DIREITA */
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                align-items: start;
+            }
+            
+            .about-text {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+            
+            .about-text p {
+                margin-bottom: 20px;
+            }
+            
+            .section-header {
+                margin-bottom: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            /* LAYOUT LADO A LADO - TEXTO ESQUERDA, IMAGEM DIREITA */
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+                align-items: start;
+            }
+            
+            .about-text {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+            
+            .about-text p {
+                margin-bottom: 15px;
+            }
+            
+            .status-text {
+                font-size: 1.1rem;
+            }
+            
+            .image-placeholder {
+                min-height: 180px;
+                padding: 8px;
+                display: flex;
+                align-items: center;
+            }
+            
+            /* IMAGEM MAIOR EM MOBILE PEQUENO */
+            .test-image {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+            
+            .section-header {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            /* LAYOUT LADO A LADO - TEXTO ESQUERDA, IMAGEM DIREITA */
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                align-items: start;
+            }
+            
+            .about-text {
+                font-size: 0.75rem;
+                line-height: 1.4;
+            }
+            
+            .about-text p {
+                margin-bottom: 12px;
+            }
+            
+            .image-placeholder {
+                min-height: 160px;
+                padding: 6px;
+                display: flex;
+                align-items: center;
+            }
+            
+            /* IMAGEM MAIOR EM MOBILE MUITO PEQUENO */
+            .test-image {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .about-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                align-items: start;
+            }
+            
+            .about-text {
+                font-size: 0.7rem;
+            }
+            
+            .image-placeholder {
+                min-height: 150px;
+                padding: 5px;
+            }
+            
+            /* IMAGEM MAIOR EM TELAS MUITO PEQUENAS */
+            .test-image {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+
+    <link rel="icon" type="image/x-icon" href="images/favicon_16x16.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Imagem de fundo apenas do lado esquerdo -->
+    <div class="background-images">
+        <div class="bg-left"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo - Marca de roupas esportivas" class="logo-img" loading="lazy">
+                    <div class="logo-text">SNOULES</div>
+                </div>
+                
+                <nav class="nav-menu" aria-label="Navegação principal">
+                    
+                    <!-- Container dos links de navegação -->
+                    <div class="nav-links-container" id="nav-links-container">
+                        <!-- Links de navegação -->
+                        <a href="index.html" class="nav-link">HOME</a>
+                        <a href="sobre.html" class="nav-link active">SOBRE</a>
+                        <a href="loja.html" class="nav-link">LOJA</a>
+                        <a href="apoie.html" class="nav-link nav-link-apoie">APOIE</a>
+                        
+                        <!-- Menu do usuário (visível apenas quando logado) -->
+                        <div class="user-menu" id="menu-usuario" style="display: none;">
+                            <span id="nome-usuario"></span>
+                        </div>
+                        <!-- Link de login (visível apenas quando não logado) -->
+                        <a href="login.html" id="link-login" class="nav-link login-link">Login</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main role="main">
+        <section id="about" class="about" aria-labelledby="about-heading">
+            <div class="container">
+                <div class="section-header fade-in">
+                    <h1 id="about-heading" class="section-title">Nossa Tecnologia</h1>
+                    <p class="section-subtitle">
+                        Os valores que nos movem
+                    </p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text fade-in">
+                        <p>
+                            Acreditamos que a verdadeira performance nasce da união entre tecnologia e liberdade de movimento.
+                            Desenvolvemos cada peça para pessoas como você que busca superar seus limites.
+                        </p>
+                        <p>
+                            Cada costura, cada detalhe foi pensado para oferecer o máximo de performance sem abrir mão do estilo e da durabilidade.
+                        </p>
+                    </div>
+                    <div class="image-placeholder fade-in">
+                        <img src="images/02.jpg" 
+                             alt="Demonstração de tecnologia em movimento - Coleção Snoules" 
+                             class="test-image"
+                             loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="status" aria-labelledby="status-heading">
+            <div class="container">
+                <h2 id="status-heading" class="sr-only">Status da Loja</h2>
+                <div class="status-message fade-in">
+                    <p class="status-text">
+                        "Estamos finalizando nossa estrutura operacional para oferecer 
+                        a melhor experiência possível. Em breve, teremos novidades."
+                    </p>
+                </div>
+                
+                <div class="separator-line fade-in"></div>
+                
+                <button class="status-badge fade-in" onclick="window.location.href='loja.html'" aria-label="Abrir loja virtual" role="button">
+                    CONHEÇA A LOJA
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo" class="footer-logo" loading="lazy">
+                    <p class="footer-text">
+                        Uma marca que redefine o conceito de moda através de designs inovadores 
+                        e compromisso com a excelência.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="mailto:snoulescreative@gmail.com">snoulescreative@gmail.com</a></li>
+                    </ul>
+                    <h3 class="footer-heading">Siga-nos</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/snoules/" target="_blank" title="Instagram" aria-label="Siga-nos no Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Snoules. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script do menu hamburguer -->
+    <script src="js/menu.js"></script>
+    
+    <!-- Script de autenticação -->
+    <script type="module">
+        import { atualizarInterfaceUsuario, configurarLogout, verificarAutenticacao } from './js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Verificar autenticação
+            verificarAutenticacao();
+            
+            // Atualizar interface do usuário
+            atualizarInterfaceUsuario();
+            
+            // Configurar logout
+            configurarLogout();
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

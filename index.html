@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snoules - Creative</title>
+    <meta name="description" content="Snoules - Performance em Movimento. Tecnologia e design para elevar seu limite esportivo.">
+    <meta name="keywords" content="roupas esportivas, performance, tecnologia, conforto, moda fitness">
+    
+    <!-- Meta Tags para SEO -->
+    <meta property="og:title" content="Snoules - Creative">
+    <meta property="og:description" content="Snoules - Performance em Movimento. Tecnologia e design para elevar seu limite esportivo.">
+    <meta property="og:type" content="website">
+    <meta name="robots" content="index, follow">
+    
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- CSS Específico da Home -->
+    <style>
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 120px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10,10,10,0.9) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .brand-name-img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            font-weight: 600;
+            display: block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--text-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover {
+            color: var(--primary-black);
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Background específico da home */
+        .bg-left {
+            background-image: url('images/cubokok.gif');
+        }
+
+        /* Responsividade específica da home */
+        @media (max-width: 968px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .brand-name-img {
+                max-width: 250px;
+                padding: 0 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .brand-name-img {
+                max-width: 250px;
+                padding: 0 30px;
+            }
+            
+            .hero {
+                padding-top: 140px;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .hero-content {
+                padding: 40px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .brand-name-img {
+                max-width: 200px;
+                padding: 0 40px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+                padding: 0 20px;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 20px;
+            }
+            
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .brand-name-img {
+                max-width: 180px;
+                padding: 0 20px;
+            }
+            
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+
+    <link rel="icon" type="image/x-icon" href="images/favicon_16x16.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-images">
+        <div class="bg-left"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo - Marca de roupas esportivas" class="logo-img" loading="lazy">
+                    <div class="logo-text">SNOULES</div>
+                </div>
+                
+                <nav class="nav-menu">
+
+                    <!-- Container dos links de navegação -->
+                    <div class="nav-links-container" id="nav-links-container">
+                        <!-- Links de navegação -->
+                      <a href="index.html" class="nav-link active">HOME</a>
+                      <a href="sobre.html" class="nav-link">SOBRE</a>
+                      <a href="loja.html" class="nav-link">LOJA</a>
+                      <a href="apoie.html" class="nav-link nav-link-apoie">APOIE</a>
+            
+                        <!-- Link de login -->
+                        <a href="login.html" id="link-login" class="nav-link login-link">Login</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <img src="images/snoules.png" alt="Snoules - Performance em Movimento" class="brand-name-img fade-in" loading="lazy">
+                <h1 class="hero-title">
+                    <span>Performance em Movimento</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Tecnologia e design para elevar o seu limite.
+                    Conforto que acompanha cada passo da sua evolução esportiva.
+                </p>
+
+                <a href="sobre.html" class="cta-button" aria-label="Conhecer a marca Snoules">CONHECER A MARCA</a>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="images/logo-snoules.png" alt="Snoules Logo" class="footer-logo" loading="lazy">
+                    <p class="footer-text">
+                        Uma marca que redefine o conceito de moda através de designs inovadores 
+                        e compromisso com a excelência.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="footer-heading">Contato</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://mail.google.com/mail/u/0/#search/snoulescreative%40gmail.com?compose=new">snoulescreative@gmail.com</a></li>
+                    </ul>
+                    <h3 class="footer-heading">Siga-nos</h3>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/snoules/" target="_blank" title="Instagram" aria-label="Siga-nos no Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Snoules. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script do menu hamburguer -->
+    <script src="js/menu.js"></script>
+    
+    <!-- Scripts principais -->
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+</body>
+</html>

@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Painel Admin Snoules</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-black: #000000; /* Alterado para preto total */
+            --secondary-black: #1a1a1a;
+            --accent-gray: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --border-color: #333333;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+            --info-color: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--primary-black); /* Fundo totalmente preto */
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden; /* Evita rolagem horizontal */
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 900px; /* Aumentado para acomodar melhor o layout */
+            padding: 20px;
+            display: flex;
+            gap: 40px; /* Aumentei o espaçamento entre GIF e painel */
+            align-items: center;
+            justify-content: center; /* Centraliza todo o conteúdo */
+        }
+
+        .gif-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-start; /* Alinha o GIF à esquerda */
+            align-items: center;
+            max-width: 400px;
+            margin-left: -30px; /* Move o GIF mais para a esquerda */
+        }
+
+        .test-gif {
+            width: 100%;
+            max-width: 350px; /* Aumentei um pouco o tamanho do GIF */
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .login-card {
+            background: var(--secondary-black);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-logo h1 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .login-logo p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            background: var(--primary-black);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--info-color);
+            box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+        }
+
+        .form-input.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.2);
+        }
+
+        .form-input.success {
+            border-color: var(--success-color);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--text-primary);
+            color: var(--primary-black);
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid var(--text-primary);
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            z-index: 100;
+        }
+
+        .lock-overlay.active {
+            display: flex;
+        }
+
+        .lock-icon {
+            font-size: 3rem;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+
+        .lock-message {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Logo de teste */
+        .test-logo {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .test-logo img {
+            max-width: 120px;
+            height: auto;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .test-logo img:hover {
+            opacity: 1;
+        }
+
+        .test-logo-text {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            margin-top: 8px;
+        }
+
+        /* Modal de Configuração de Segurança */
+        .security-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .security-modal.active {
+            display: flex;
+        }
+
+        .security-content {
+            background: var(--secondary-black);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+        }
+
+        .security-header {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .security-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .security-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .setup-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .setup-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: var(--primary-black);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .password-strength {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak { background: var(--error-color); width: 33%; }
+        .strength-medium { background: var(--warning-color); width: 66%; }
+        .strength-strong { background: var(--success-color); width: 100%; }
+
+        .strength-text {
+            font-size: 0.8rem;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.6s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                max-width: 400px;
+                gap: 20px;
+            }
+            
+            .gif-container {
+                max-width: 100%;
+                margin-left: 0;
+                justify-content: center;
+            }
+            
+            .test-gif {
+                max-width: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+            
+            .security-content {
+                padding: 20px;
+            }
+            
+            .test-logo img {
+                max-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div class="login-container" id="loginContainer">
+        <!-- Container para o GIF de teste -->
+        <div class="gif-container">
+            <img src="images/cubo.gif" alt="Teste de Segurança" class="test-gif">
+        </div>
+
+        <div class="login-card">
+            <!-- Overlay de bloqueio -->
+            <div class="lock-overlay" id="lockOverlay">
+                <div class="lock-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="lock-message" id="lockMessage">
+                    Acesso temporariamente bloqueado
+                </div>
+            </div>
+
+            <div class="login-logo">
+                <h1>SNOULES ADMIN</h1>
+                <p>Painel Administrativo</p>
+            </div>
+
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label" for="username">Usuário</label>
+                    <div class="input-group">
+                        <input type="text" class="form-input" id="username" autocomplete="username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Senha</label>
+                    <div class="input-group">
+                        <input type="password" class="form-input" id="password" autocomplete="current-password" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <i class="fas fa-sign-in-alt"></i> Entrar no Painel
+                </button>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 10px;">Verificando credenciais...</p>
+                </div>
+            </form>
+
+            <!-- Logo de teste adicionada aqui -->
+            <div class="test-logo">
+                <img src="images/logo-snoules.png" alt="Logo Teste">
+                <div class="test-logo-text">Dreams Above Time</div>
+            </div>
+
+            <div class="login-footer">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Configuração de Segurança (Primeiro Acesso) -->
+    <div class="security-modal" id="securityModal">
+        <div class="security-content">
+            <div class="security-header">
+                <h2 class="security-title">Configuração de Segurança</h2>
+                <p class="security-description">Primeiro acesso detectado. Configure suas credenciais de administrador.</p>
+            </div>
+
+            <form class="setup-form" id="setupForm">
+                <div class="form-group">
+                    <label class="form-label" for="newUsername">Nome de Usuário</label>
+                    <input type="text" class="form-input" id="newUsername" required minlength="3">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="newPassword">Senha</label>
+                    <input type="password" class="form-input" id="newPassword" required minlength="8">
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                    <div class="strength-text" id="strengthText">Força da senha</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Confirmar Senha</label>
+                    <input type="password" class="form-input" id="confirmPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="securityKey">Chave de Segurança</label>
+                    <input type="text" class="form-input" id="securityKey" placeholder="Digite uma frase secreta" required>
+                    <small style="color: var(--text-secondary); margin-top: 5px; display: block;">
+                        Esta chave será usada para recuperação de acesso em caso de emergência.
+                    </small>
+                </div>
+
+                <div class="setup-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelSetup">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="saveCredentials">Salvar Credenciais</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        class SecureLoginSystem {
+            constructor() {
+                this.loginAttempts = 0;
+                this.maxAttempts = 5;
+                this.lockoutTime = 30 * 60 * 1000; // 30 minutos
+                this.isLocked = false;
+                this.lockoutUntil = null;
+                this.DEFAULT_USERNAME = 'admin';
+                this.DEFAULT_PASSWORD = '9uluuccp2';
+                this.init();
+            }
+
+            init() {
+                this.clearPreviousSession();
+                this.setupDefaultCredentials();
+                this.checkFirstAccess();
+                this.setupEventListeners();
+                this.checkLockoutStatus();
+            }
+
+            clearPreviousSession() {
+                sessionStorage.removeItem('snoules-admin-session');
+                sessionStorage.removeItem('snoules-admin-login-time');
+                sessionStorage.removeItem('snoules-admin-last-activity');
+            }
+
+            setupDefaultCredentials() {
+                // Verificar se já existem credenciais, se não, configurar as padrão
+                const hasCredentials = localStorage.getItem('snoules-admin-credentials');
+                if (!hasCredentials) {
+                    const credentials = {
+                        username: this.DEFAULT_USERNAME,
+                        securityKey: 'chave-secreta-padrao-snoules',
+                        createdAt: new Date().toISOString(),
+                        password: this.DEFAULT_PASSWORD
+                    };
+
+                    // Simular criptografia básica
+                    const encryptedData = btoa(unescape(encodeURIComponent(JSON.stringify(credentials))));
+                    const iv = Array.from(crypto.getRandomValues(new Uint8Array(16)));
+                    
+                    const storageData = {
+                        encryptedData,
+                        iv
+                    };
+
+                    localStorage.setItem('snoules-admin-credentials', JSON.stringify(storageData));
+                    localStorage.setItem('snoules-admin-setup', 'completed');
+                    
+                    console.log('Credenciais padrão configuradas:');
+                    console.log('Usuário:', this.DEFAULT_USERNAME);
+                    console.log('Senha:', this.DEFAULT_PASSWORD);
+                }
+            }
+
+            checkFirstAccess() {
+                const adminCredentials = localStorage.getItem('snoules-admin-credentials');
+                if (!adminCredentials) {
+                    setTimeout(() => {
+                        this.showSecurityModal();
+                    }, 1000);
+                }
+            }
+
+            setupEventListeners() {
+                // Login form
+                const loginForm = document.getElementById('loginForm');
+                const passwordToggle = document.getElementById('passwordToggle');
+                const passwordInput = document.getElementById('password');
+                const usernameInput = document.getElementById('username');
+                const newPasswordInput = document.getElementById('newPassword');
+                const confirmPasswordInput = document.getElementById('confirmPassword');
+
+                if (loginForm) {
+                    loginForm.addEventListener('submit', (e) => this.handleLogin(e));
+                }
+
+                if (passwordToggle) {
+                    passwordToggle.addEventListener('click', () => this.togglePasswordVisibility(passwordInput, passwordToggle));
+                }
+
+                // Reset error states on input
+                if (usernameInput && passwordInput) {
+                    usernameInput.addEventListener('input', () => this.resetErrorState(usernameInput));
+                    passwordInput.addEventListener('input', () => this.resetErrorState(passwordInput));
+                }
+
+                // Setup form
+                const setupForm = document.getElementById('setupForm');
+                const cancelSetup = document.getElementById('cancelSetup');
+
+                if (setupForm) {
+                    setupForm.addEventListener('submit', (e) => this.handleSetup(e));
+                    if (newPasswordInput) {
+                        newPasswordInput.addEventListener('input', () => this.checkPasswordStrength());
+                    }
+                    if (confirmPasswordInput) {
+                        confirmPasswordInput.addEventListener('input', () => this.validatePasswordMatch());
+                    }
+                }
+
+                if (cancelSetup) {
+                    cancelSetup.addEventListener('click', () => this.hideSecurityModal());
+                }
+            }
+
+            resetErrorState(input) {
+                input.classList.remove('error');
+                input.classList.remove('shake');
+            }
+
+            showErrorState(inputs) {
+                inputs.forEach(input => {
+                    input.classList.add('error');
+                    input.classList.add('shake');
+                    
+                    // Remove shake animation after it completes
+                    setTimeout(() => {
+                        input.classList.remove('shake');
+                    }, 600);
+                });
+            }
+
+            checkLockoutStatus() {
+                const lockoutData = localStorage.getItem('snoules-admin-lockout');
+                if (lockoutData) {
+                    const { until, attempts } = JSON.parse(lockoutData);
+                    this.lockoutUntil = new Date(until);
+                    this.loginAttempts = attempts;
+
+                    if (new Date() < this.lockoutUntil) {
+                        this.isLocked = true;
+                        this.showLockOverlay();
+                    } else {
+                        localStorage.removeItem('snoules-admin-lockout');
+                        this.isLocked = false;
+                        this.loginAttempts = 0;
+                        this.hideLockOverlay();
+                    }
+                }
+            }
+
+            showLockOverlay() {
+                const lockOverlay = document.getElementById('lockOverlay');
+                if (lockOverlay) {
+                    lockOverlay.classList.add('active');
+                }
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) loginBtn.disabled = true;
+            }
+
+            hideLockOverlay() {
+                const lockOverlay = document.getElementById('lockOverlay');
+                if (lockOverlay) {
+                    lockOverlay.classList.remove('active');
+                }
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) loginBtn.disabled = false;
+            }
+
+            async handleLogin(e) {
+                e.preventDefault();
+                
+                if (this.isLocked) {
+                    return;
+                }
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+
+                if (!username || !password) {
+                    const inputs = [];
+                    if (!username) inputs.push(usernameInput);
+                    if (!password) inputs.push(passwordInput);
+                    this.showErrorState(inputs);
+                    return;
+                }
+
+                this.showLoading(true);
+
+                // Simular verificação de credenciais
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                const isValid = await this.validateCredentials(username, password);
+
+                this.showLoading(false);
+
+                if (isValid) {
+                    this.loginSuccess();
+                } else {
+                    this.loginFailed([usernameInput, passwordInput]);
+                }
+            }
+
+            async validateCredentials(username, password) {
+                try {
+                    const storedData = localStorage.getItem('snoules-admin-credentials');
+                    if (!storedData) return false;
+
+                    const { encryptedData, iv } = JSON.parse(storedData);
+                    
+                    // Decrypt and validate credentials
+                    const decryptedData = await this.decryptData(encryptedData, iv, password);
+                    if (!decryptedData) return false;
+
+                    const credentials = JSON.parse(decryptedData);
+                    
+                    // Verificar se o usuário e senha correspondem
+                    return credentials.username === username && credentials.password === password;
+                } catch (error) {
+                    console.error('Erro na validação:', error);
+                    return false;
+                }
+            }
+
+            async handleSetup(e) {
+                e.preventDefault();
+
+                const username = document.getElementById('newUsername').value;
+                const password = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const securityKey = document.getElementById('securityKey').value;
+
+                if (password !== confirmPassword) {
+                    const confirmInput = document.getElementById('confirmPassword');
+                    this.showErrorState([confirmInput]);
+                    return;
+                }
+
+                if (password.length < 8) {
+                    const passwordInput = document.getElementById('newPassword');
+                    this.showErrorState([passwordInput]);
+                    return;
+                }
+
+                if (this.checkPasswordStrength() < 2) {
+                    const passwordInput = document.getElementById('newPassword');
+                    this.showErrorState([passwordInput]);
+                    return;
+                }
+
+                await this.saveCredentials(username, password, securityKey);
+                this.hideSecurityModal();
+            }
+
+            async saveCredentials(username, password, securityKey) {
+                try {
+                    const credentials = {
+                        username,
+                        securityKey,
+                        password: password,
+                        createdAt: new Date().toISOString()
+                    };
+
+                    // Simulate encryption
+                    const iv = crypto.getRandomValues(new Uint8Array(16));
+                    const encryptedData = await this.encryptData(JSON.stringify(credentials), iv, password);
+                    
+                    const storageData = {
+                        encryptedData,
+                        iv: Array.from(iv)
+                    };
+
+                    localStorage.setItem('snoules-admin-credentials', JSON.stringify(storageData));
+                    localStorage.setItem('snoules-admin-setup', 'completed');
+                    
+                    // Mostrar mensagem de sucesso
+                    alert('Credenciais configuradas com sucesso! Use o usuário e senha criados para fazer login.');
+                    
+                } catch (error) {
+                    console.error('Erro ao salvar credenciais:', error);
+                    alert('Erro ao salvar credenciais. Tente novamente.');
+                }
+            }
+
+            async encryptData(data, iv, password) {
+                // Simulated encryption
+                return btoa(unescape(encodeURIComponent(data)));
+            }
+
+            async decryptData(encryptedData, iv, password) {
+                try {
+                    // Simulated decryption
+                    return decodeURIComponent(escape(atob(encryptedData)));
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            loginSuccess() {
+                this.loginAttempts = 0;
+                localStorage.removeItem('snoules-admin-lockout');
+                
+                const sessionToken = this.generateSessionToken();
+                sessionStorage.setItem('snoules-admin-session', sessionToken);
+                sessionStorage.setItem('snoules-admin-login-time', new Date().toISOString());
+                
+                // Show success state briefly
+                const usernameInput = document.getElementById('username');
+                const passwordInput = document.getElementById('password');
+                usernameInput.classList.add('success');
+                passwordInput.classList.add('success');
+                
+                setTimeout(() => {
+                    // Redirecionar para o painel admin
+                    window.location.href = 'admin.html';
+                }, 500);
+            }
+
+            loginFailed(inputs) {
+                this.loginAttempts++;
+                this.showErrorState(inputs);
+                
+                if (this.loginAttempts >= this.maxAttempts) {
+                    this.lockoutSystem();
+                }
+
+                this.saveLockoutState();
+            }
+
+            lockoutSystem() {
+                this.isLocked = true;
+                this.lockoutUntil = new Date(Date.now() + this.lockoutTime);
+                this.saveLockoutState();
+                this.showLockOverlay();
+            }
+
+            saveLockoutState() {
+                const lockoutData = {
+                    until: this.lockoutUntil,
+                    attempts: this.loginAttempts
+                };
+                localStorage.setItem('snoules-admin-lockout', JSON.stringify(lockoutData));
+            }
+
+            generateSessionToken() {
+                return 'snoules_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+            togglePasswordVisibility(input, toggle) {
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                toggle.innerHTML = isPassword ? '<i class="fas fa-eye-slash"></i>' : '<i class="fas fa-eye"></i>';
+            }
+
+            checkPasswordStrength() {
+                const passwordInput = document.getElementById('newPassword');
+                if (!passwordInput) return 0;
+                
+                const password = passwordInput.value;
+                const strengthBar = document.getElementById('strengthBar');
+                const strengthText = document.getElementById('strengthText');
+                
+                if (!strengthBar || !strengthText) return 0;
+                
+                let strength = 0;
+                let feedback = '';
+
+                if (password.length >= 8) strength += 1;
+                if (/[a-z]/.test(password)) strength += 1;
+                if (/[A-Z]/.test(password)) strength += 1;
+                if (/[0-9]/.test(password)) strength += 1;
+                if (/[^a-zA-Z0-9]/.test(password)) strength += 1;
+
+                strengthBar.className = 'strength-bar';
+                if (strength <= 2) {
+                    strengthBar.classList.add('strength-weak');
+                    feedback = 'Fraca';
+                } else if (strength <= 4) {
+                    strengthBar.classList.add('strength-medium');
+                    feedback = 'Média';
+                } else {
+                    strengthBar.classList.add('strength-strong');
+                    feedback = 'Forte';
+                }
+
+                strengthText.textContent = feedback;
+                return strength;
+            }
+
+            validatePasswordMatch() {
+                const password = document.getElementById('newPassword').value;
+                const confirm = document.getElementById('confirmPassword').value;
+                const confirmInput = document.getElementById('confirmPassword');
+
+                if (confirm && password !== confirm) {
+                    confirmInput.style.borderColor = 'var(--error-color)';
+                } else if (confirm) {
+                    confirmInput.style.borderColor = 'var(--success-color)';
+                } else {
+                    confirmInput.style.borderColor = 'var(--border-color)';
+                }
+            }
+
+            showSecurityModal() {
+                const modal = document.getElementById('securityModal');
+                if (modal) modal.classList.add('active');
+            }
+
+            hideSecurityModal() {
+                const modal = document.getElementById('securityModal');
+                if (modal) modal.classList.remove('active');
+            }
+
+            showLoading(show) {
+                const loading = document.getElementById('loading');
+                const loginBtn = document.getElementById('loginBtn');
+                
+                if (loading) loading.style.display = show ? 'block' : 'none';
+                if (loginBtn) loginBtn.style.display = show ? 'none' : 'block';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new SecureLoginSystem();
+        });
+    </script>
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - Snoules</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="admin-sidebar">
+            <div class="admin-logo">
+                <h1>SNOULES ADMIN</h1>
+            </div>
+            <nav class="admin-nav">
+                <a href="#" class="nav-item active" data-tab="orders">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>Pedidos Ativos</span>
+                </a>
+                <a href="#" class="nav-item" data-tab="cancelled">
+                    <i class="fas fa-ban"></i>
+                    <span>Pedidos Cancelados</span>
+                </a>
+                <a href="#" class="nav-item" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Sair</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="admin-main">
+            <div class="admin-header">
+                <h1 class="admin-title">Gerenciar Pedidos</h1>
+                <button class="logout-btn" id="headerLogoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Sair do Sistema
+                </button>
+            </div>
+
+            <!-- Abas -->
+            <div class="admin-tabs">
+                <button class="tab-btn active" data-tab="orders">
+                    <i class="fas fa-shopping-bag"></i>
+                    Pedidos Ativos
+                    <span class="tab-badge" id="activeOrdersCount">0</span>
+                </button>
+                <button class="tab-btn" data-tab="cancelled">
+                    <i class="fas fa-ban"></i>
+                    Pedidos Cancelados
+                    <span class="tab-badge" id="cancelledOrdersCount">0</span>
+                </button>
+            </div>
+
+            <!-- Conteúdo da aba de pedidos ativos -->
+            <div id="ordersTab" class="tab-content active">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card pending">
+                        <div class="stat-number" id="pendingCount">0</div>
+                        <div class="stat-label">Processando</div>
+                    </div>
+                    <div class="stat-card shipped">
+                        <div class="stat-number" id="shippedCount">0</div>
+                        <div class="stat-label">Enviados</div>
+                    </div>
+                    <div class="stat-card delivered">
+                        <div class="stat-number" id="deliveredCount">0</div>
+                        <div class="stat-label">Entregues</div>
+                    </div>
+                </div>
+
+                <!-- Orders Table Container -->
+                <div class="orders-container">
+                    <!-- Table Controls -->
+                    <div class="table-controls">
+                        <h2 class="table-title">Pedidos Ativos</h2>
+                        <div class="table-filters">
+                            <select class="filter-select" id="statusFilter">
+                                <option value="all">Todos os status</option>
+                                <option value="pending">Processo</option>
+                                <option value="shipped">Enviados</option>
+                                <option value="delivered">Entregues</option>
+                            </select>
+                            <input type="text" class="search-box" id="searchOrders" placeholder="Buscar pedidos...">
+                        </div>
+                    </div>
+                    
+                    <!-- Responsive Table -->
+                    <div class="responsive-table">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th class="order-id">ID</th>
+                                    <th class="customer-info">Cliente</th>
+                                    <th class="order-value">Valor</th>
+                                    <th class="order-date mobile-hidden">Data</th>
+                                    <th class="order-status">Status</th>
+                                    <th class="order-actions">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <!-- Orders will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyState" class="empty-table" style="display: none;">
+                        <i class="fas fa-shopping-bag"></i>
+                        <h3>Nenhum pedido ativo encontrado</h3>
+                        <p>Os pedidos ativos aparecerão aqui.</p>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-pagination">
+                        <div class="pagination-info" id="paginationInfo">
+                            Mostrando 0 de 0 pedidos
+                        </div>
+                        <div class="pagination-controls" id="paginationControls">
+                            <!-- Pagination buttons will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conteúdo da aba de pedidos cancelados -->
+            <div id="cancelledTab" class="tab-content">
+                <!-- Orders Table Container para Cancelados -->
+                <div class="orders-container">
+                    <!-- Table Controls -->
+                    <div class="table-controls">
+                        <h2 class="table-title">Pedidos Cancelados</h2>
+                        <div class="table-filters">
+                            <input type="text" class="search-box" id="searchCancelledOrders" placeholder="Buscar pedidos cancelados...">
+                        </div>
+                    </div>
+                    
+                    <!-- Responsive Table -->
+                    <div class="responsive-table">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th class="order-id">ID</th>
+                                    <th class="customer-info">Cliente</th>
+                                    <th class="order-value">Valor</th>
+                                    <th class="order-date mobile-hidden">Data do Pedido</th>
+                                    <th class="order-date mobile-hidden">Data do Cancelamento</th>
+                                    <th class="order-status">Status</th>
+                                    <th class="order-actions">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cancelledOrdersTableBody">
+                                <!-- Cancelled orders will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyCancelledState" class="empty-table" style="display: none;">
+                        <i class="fas fa-ban"></i>
+                        <h3>Nenhum pedido cancelado</h3>
+                        <p>Os pedidos cancelados aparecerão aqui.</p>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="table-pagination">
+                        <div class="pagination-info" id="cancelledPaginationInfo">
+                            Mostrando 0 de 0 pedidos
+                        </div>
+                        <div class="pagination-controls" id="cancelledPaginationControls">
+                            <!-- Pagination buttons will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Details Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Detalhes do Pedido</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Order details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancel Confirmation Modal -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Confirmar Ação</h2>
+                <button class="close-modal" id="closeCancelModal">&times;</button>
+            </div>
+            <div class="modal-body" id="cancelModalBody">
+                <!-- Cancel confirmation content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão de Refresh -->
+    <button class="refresh-btn" id="refreshBtn">
+        <i class="fas fa-sync-alt"></i>
+        Atualizar
+    </button>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

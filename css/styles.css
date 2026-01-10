@@ -886,17 +886,95 @@ footer {
     flex-shrink: 0 !important;
 }
 
-/* ===== AJUSTE DIRETO PARA LOJA NO MOBILE ===== */
+/* ============================================================================
+   CONFIGURAÇÕES MOBILE ORGANIZADAS POR PÁGINA
+   ============================================================================ */
+
+/* MOBILE: Ajustes gerais para todas as páginas */
 @media (max-width: 768px) {
-    /* Ajuste DIRETO e SIMPLES */
-    main {
-        position: relative;
-        top: -05px; /* Ajuste este valor: -30px, -40px, -50px, etc */
-    }
-    
-    /* Opcional: ajusta o container se existir */
-    .container {
-        margin-top: 0 !important;
-        padding-top: 20px !important;
-    }
+  
+  /* ==================== PÁGINA: LOJA/PRODUTOS ==================== */
+  /* Ajustes específicos para a página da Loja */
+  body.page-loja .main-content,
+  body.page-produtos .main-content,
+  body.page-shop .main-content {
+    margin-top: -80px !important;
+    padding-top: 20px !important;
+  }
+  
+  /* Título "Nossa Coleção" na Loja */
+  body.page-loja h1:first-of-type,
+  body.page-produtos h1:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 10px !important;
+  }
+  
+  /* Grid de produtos na Loja */
+  body.page-loja .products-grid,
+  body.page-produtos .products-grid {
+    margin-top: 0 !important;
+  }
+  
+  /* ==================== PÁGINA: SOBRE ==================== */
+  /* Ajustes específicos para a página Sobre */
+  body.page-sobre .main-content,
+  body.page-about .main-content {
+    margin-top: 0 !important; /* Mantém como está */
+  }
+  
+  /* Título da página Sobre */
+  body.page-sobre h1:first-of-type,
+  body.page-about h1:first-of-type {
+    margin-top: 20px !important;
+  }
+  
+  /* ==================== PÁGINA: HOME/INÍCIO ==================== */
+  /* Ajustes específicos para a página inicial */
+  body.page-home .hero-section,
+  body.page-index .hero-section {
+    padding-top: 100px !important;
+  }
+  
+  /* ==================== PÁGINA: APOIE ==================== */
+  /* Ajustes específicos para a página Apoie */
+  body.page-apoie .main-content {
+    margin-top: 0 !important;
+  }
+  
+  /* ==================== PÁGINA: LOGIN/CADASTRO ==================== */
+  /* Ajustes para páginas de autenticação */
+  body.page-login .login-container,
+  body.page-cadastro .register-container {
+    margin-top: 50px !important;
+    padding-top: 20px !important;
+  }
+  
+}
+
+/* ============================================================================
+   AJUSTES DE VALORES (TESTE E MODIFIQUE AQUI)
+   ============================================================================ */
+/* 
+   VALORES PARA AJUSTAR A PÁGINA LOJA:
+   - margin-top: negativo = move PARA CIMA
+   - margin-top: positivo = move PARA BAIXO
+   
+   Valores sugeridos para testar:
+   -100px, -120px, -150px, -200px
+*/
+
+/* ============================================================================
+   SOLUÇÃO DE EMERGÊNCIA (se nada acima funcionar)
+   ============================================================================ */
+@media (max-width: 768px) {
+  /* Solução RADICAL para Loja - Remove todo espaçamento */
+  body.page-loja main {
+    position: relative;
+    top: -150px !important; /* Ajuste este valor */
+  }
+  
+  /* Ou usando transform (mais performático) */
+  body.page-loja .container:first-of-type {
+    transform: translateY(-150px) !important;
+  }
 }

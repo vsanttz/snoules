@@ -891,7 +891,7 @@ footer {
     /* Ajuste DIRETO e SIMPLES */
     main {
         position: relative;
-        top: -60px; /* Ajuste este valor: -30px, -40px, -50px, etc */
+        top: -05px; /* Ajuste este valor: -30px, -40px, -50px, etc */
     }
     
     /* Opcional: ajusta o container se existir */

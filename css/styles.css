@@ -962,3 +962,27 @@ footer {
    Valores sugeridos para testar:
    -100px, -120px, -150px, -200px
 */
+
+/* ============================================================================
+   VERSÃO SEM MODIFICAR HTML (detecta pela URL ou conteúdo)
+   ============================================================================ */
+@media (max-width: 768px) {
+  
+  /* Detecta Loja pelo link ativo no menu */
+  .nav-link[href*="loja"].active ~ main,
+  .nav-link[href*="produtos"].active ~ main {
+    margin-top: -100px !important;
+  }
+  
+  /* Detecta Loja pelo título */
+  h1:contains("Nossa Coleção") {
+    margin-top: 0 !important;
+  }
+  
+  /* Detecta Loja pela existência de produtos */
+  body:has(.product-card) main,
+  body:has(.products-grid) .main-content {
+    transform: translateY(-120px) !important;
+  }
+  
+}
